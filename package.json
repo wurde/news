@@ -1,0 +1,13 @@
+{
+  "name": "news",
+  "version": "0.0.0",
+  "description": "A simple news reader.",
+  "private": true,
+  "scripts": {
+    "start": "npm start --prefix client",
+    "build": "npm build --prefix client"
+  },
+  "keywords": ["news", "react"],
+  "author": "Andy Bettisworth",
+  "license": "MIT"
+}
