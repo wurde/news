@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "start": "npm start --prefix client",
-    "build": "npm build --prefix client"
+    "build": "npm build --prefix client",
+    "install": "npm install --prefix client"
   },
   "keywords": [
     "news",
