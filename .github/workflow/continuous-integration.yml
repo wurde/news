@@ -1,0 +1,16 @@
+name: Continuous Integration
+
+on: push
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v1
+      - name: Cypress Run
+        uses: cypress-io/github-action@v1
+        with:
+          start: npm start
+          working-directory: client
