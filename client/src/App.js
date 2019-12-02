@@ -11,6 +11,7 @@ import {
   Heading,
   List,
   ListItem,
+  Link,
 } from '@wurde/components';
 
 /**
@@ -29,12 +30,16 @@ function App() {
           </Header>
 
           <main>
-            <List id="articles" type="ordered" style={{ listStyleType: 'none' }}>
+            <List
+              id="articles"
+              type="ordered"
+              style={{ listStyleType: 'none' }}
+            >
               <ListItem className="article">
-                <a href="#">Article #1</a>
+                <Link href="#">Article #1</Link>
               </ListItem>
               <ListItem className="article">
-                <a href="#">Article #2</a>
+                <Link href="#">Article #2</Link>
               </ListItem>
             </List>
           </main>
