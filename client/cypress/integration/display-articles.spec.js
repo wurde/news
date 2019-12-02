@@ -9,6 +9,11 @@ describe('Display articles', () => {
 
   it('Has a list of articles', () => {
     cy.get('h1').contains('News');
-    cy.get('li.article').should('have.length.of.at.least', 2);
+
+    const articles = cy.get('li.article')
+    articles.should('have.length.of.at.least', 2)
+    .and('have.css', 'list-style-type', 'none');
+
+    const link = articles.first().get('a');
   });
 });

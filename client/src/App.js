@@ -16,8 +16,12 @@ function App() {
       </header>
       <main>
         <ol id="articles">
-          <li className="article">Article #1</li>
-          <li className="article">Article #2</li>
+          <li className="article">
+            <a href="#">Article #1</a>
+          </li>
+          <li className="article">
+            <a href="#">Article #2</a>
+          </li>
         </ol>
       </main>
     </div>
