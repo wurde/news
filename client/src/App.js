@@ -30,16 +30,19 @@ function App() {
           </Header>
 
           <main style={{ backgroundColor: '#fff' }}>
+            <hr />
             <List
               id="articles"
               type="ordered"
-              style={{ listStyleType: 'none' }}
+              style={{ listStyleType: 'none', padding: "0px 10px", margin: "0" }}
             >
               <ListItem className="article">
                 <Link href="#">Article #1</Link>
+                <hr/>
               </ListItem>
               <ListItem className="article">
                 <Link href="#">Article #2</Link>
+                <hr/>
               </ListItem>
             </List>
           </main>
