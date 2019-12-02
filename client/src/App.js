@@ -29,7 +29,7 @@ function App() {
             </Heading>
           </Header>
 
-          <main>
+          <main style={{ backgroundColor: '#fff' }}>
             <List
               id="articles"
               type="ordered"
