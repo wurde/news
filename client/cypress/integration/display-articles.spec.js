@@ -8,7 +8,7 @@ describe('Display articles', () => {
   });
 
   it('Has a list of articles', () => {
-    cy.get('h1').contains('News');
+    cy.get('h1').contains('News')
 
     const articles = cy.get('li.article')
     articles.should('have.length.of.at.least', 2)

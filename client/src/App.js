@@ -3,6 +3,15 @@
  */
 
 import React from 'react';
+import {
+  Container,
+  Row,
+  Column,
+  Header,
+  Heading,
+  List,
+  ListItem,
+} from '@wurde/components';
 
 /**
  * Define component
@@ -10,21 +19,28 @@ import React from 'react';
 
 function App() {
   return (
-    <div>
-      <header>
-        <h1>News</h1>
-      </header>
-      <main>
-        <ol id="articles">
-          <li className="article">
-            <a href="#">Article #1</a>
-          </li>
-          <li className="article">
-            <a href="#">Article #2</a>
-          </li>
-        </ol>
-      </main>
-    </div>
+    <Container>
+      <Row>
+        <Column>
+          <Header>
+            <Heading type="h1" style={{ fontSize: '1.8rem' }}>
+              News
+            </Heading>
+          </Header>
+
+          <main>
+            <List id="articles" type="ordered" style={{ listStyleType: 'none' }}>
+              <ListItem className="article">
+                <a href="#">Article #1</a>
+              </ListItem>
+              <ListItem className="article">
+                <a href="#">Article #2</a>
+              </ListItem>
+            </List>
+          </main>
+        </Column>
+      </Row>
+    </Container>
   );
 }
 
