@@ -9,6 +9,7 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v1
+
       - name: Cypress Run
         uses: cypress-io/github-action@v1
         with:
