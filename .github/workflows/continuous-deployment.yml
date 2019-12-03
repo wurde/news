@@ -12,6 +12,11 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
+      - name: Cache node modules
+        uses: actions/cache@master
+        with:
+          path: client/node_modules
+          key: npm-${{ hashFiles('**/package-lock.json') }}
       - name: Install Dependencies
         run: npm install
       - name: Build

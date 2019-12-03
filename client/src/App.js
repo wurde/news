@@ -26,7 +26,9 @@ function App() {
         <Column>
           <Header>
             <Heading type="h1" style={{ fontSize: '1rem', textAlign: 'right' }}>
-              News <Small>v0.1.0</Small>
+              <Link href="https://github.com/wurde/news" style={{ color: 'rgb(0,0,0)' }}>
+                News <Small>v0.1.0</Small>
+              </Link>
             </Heading>
           </Header>
 
