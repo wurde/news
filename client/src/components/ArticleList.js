@@ -4,7 +4,16 @@
 
 import React, { useState, useEffect } from 'react';
 import { List, Loader } from '@wurde/components';
+import Parser from 'rss-parser';
 import Article from './Article';
+
+/**
+ * Constants
+ */
+
+// Some RSS feeds can't be loaded in the browser due to CORS security.
+// To get around this, you can use a proxy.
+const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 
 /**
  * Define component
@@ -14,8 +23,16 @@ function ArticleList() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    const result = fetch('http://feeds.bbci.co.uk/news/rss.xml');
-    console.log('result', result);
+    async function fetchFeed() {
+      try {
+        const parser = new Parser();
+        const feed = await parser.parseURL(CORS_PROXY + 'http://feeds.bbci.co.uk/news/rss.xml');
+        console.log(feed.title);
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    fetchFeed();
 
     setTimeout(() => {
       setArticles([
