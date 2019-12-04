@@ -58,7 +58,7 @@ function ArticleList() {
         margin: '0'
       }}
     >
-      {articles.map((article, i) => <Article key={i} article={article}></Article>)}
+      {articles.map((article, i) => <Article key={i} index={i} article={article}></Article>)}
     </List>
   );
 }

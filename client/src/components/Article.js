@@ -17,9 +17,10 @@ import {
 
 function Article(props) {
   const fadeInProps = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    config: { duration: 300 },
+    from: { opacity: 0, transform: 'translateY(50px)' },
+    to: { opacity: 1, transform: 'translateY(0px)' },
+    delay: props.index * 100,
+    config: { duration: 100 }
   });
 
   return (
