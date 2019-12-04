@@ -31,8 +31,13 @@ function ArticleList() {
         console.log('localArticles', localArticles);
 
         // Check last update timestamp.
-        const updatedAt = localStorage.getItem('updated-at');
-        // if (updatedAt)
+        const updatedAt = Number(localStorage.getItem('updated-at'));
+        const day = 1000 * 60 * 60 * 24;
+        const now = Date.now();
+        if ((updatedAt - now) > day) {
+          localStorage.setItem('updated-at', now);
+          console.log('fetching')
+        }
         console.log('updatedAt', updatedAt);
 
         const parser = new Parser();
