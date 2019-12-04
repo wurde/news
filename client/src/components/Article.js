@@ -16,7 +16,11 @@ import {
  */
 
 function Article(props) {
-  const fadeInProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+  const fadeInProps = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    config: { duration: 300 },
+  });
 
   return (
     <ListItem className="article">
