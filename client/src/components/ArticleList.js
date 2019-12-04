@@ -14,6 +14,9 @@ function ArticleList() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
+    const result = fetch('http://feeds.bbci.co.uk/news/rss.xml');
+    console.log('result', result);
+
     setTimeout(() => {
       setArticles([
         {
