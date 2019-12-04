@@ -15,6 +15,7 @@ import {
   Small,
 } from '@wurde/components';
 import ArticleList from './components/ArticleList';
+import pckg from '../package.json';
 
 /**
  * Define component
@@ -28,7 +29,7 @@ function App() {
           <Header>
             <Heading type="h1" style={{ fontSize: '1rem', textAlign: 'right' }}>
               <Link href="https://github.com/wurde/news" style={{ color: 'rgb(0,0,0)' }}>
-                News <Small>v0.1.0</Small>
+                News <Small>v{pckg.version}</Small>
               </Link>
             </Heading>
           </Header>
