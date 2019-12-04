@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { List, Loader } from '@wurde/components';
 import Parser from 'rss-parser';
 import Article from './Article';
+import rssFeeds from '../data/rss-feeds.json';
 
 /**
  * Constants
@@ -25,45 +26,35 @@ function ArticleList() {
   useEffect(() => {
     async function fetchFeed() {
       try {
+        // Fetch old articles from local storage.
+        let localArticles = localStorage.getItem('articles');
+        console.log('localArticles', localArticles);
+
+        // Check last update timestamp.
+        const updatedAt = localStorage.getItem('updated-at');
+        // if (updatedAt)
+        console.log('updatedAt', updatedAt);
+
         const parser = new Parser();
-        const feed = await parser.parseURL(CORS_PROXY + 'http://feeds.bbci.co.uk/news/rss.xml');
+        // // If last update was over an hour ago then fetch articles.
+        // for (let i = 0; i < rssFeeds.length; i++) {
+        //   console.log(rssFeeds[i].link);
+        // }
+        const feed = await parser.parseURL(CORS_PROXY + rssFeeds[55].link);
         console.log(feed.title);
+
+        // TODO merge unique (new) articles with old articles.
+
+        const articles = feed.items.map(item => { return { title: item.title, link: item.link }});
+        setArticles(articles)
+
+        // Save updated articles to local storage.
+        localStorage.setItem('articles', localArticles);
       } catch (e) {
         console.error(e)
       }
     }
     fetchFeed();
-
-    setTimeout(() => {
-      setArticles([
-        {
-          title:
-            'AWS announces DeepComposer, a machine-learning keyboard for developers',
-          link:
-            'https://techcrunch.com/2019/12/02/aws-announces-deepcomposer-a-machine-learning-keyboard-for-developers/',
-          createdAt: new Date()
-        },
-        {
-          title: 'Oil and gas slow to adopt artificial intelligence',
-          link:
-            'https://www.houstonchronicle.com/business/columnists/tomlinson/article/Oil-and-gas-slow-to-adopt-artificial-intelligence-14861229.php',
-          createdAt: new Date()
-        },
-        {
-          title: "This is how Facebook's AI looks for bad stuff",
-          link:
-            'https://www.technologyreview.com/f/614774/this-is-how-facebooks-ai-looks-for-bad-stuff/',
-          createdAt: new Date()
-        },
-        {
-          title:
-            'Data Scientists: Machine Learning Skills are Key to Future Jobs',
-          link:
-            'https://insights.dice.com/2019/11/29/data-scientists-machine-learning-skills-key-future-jobs/',
-          createdAt: new Date()
-        }
-      ]);
-    }, 1200)
   }, [])
 
   if (articles.length === 0) return <Loader id="articles-loader" type="loader5" style={{ display: 'flex', justifyContent: 'center' }} />;
