@@ -9,8 +9,6 @@ import {
   Column,
   Header,
   Heading,
-  List,
-  ListItem,
   Link,
   Small,
 } from '@wurde/components';
