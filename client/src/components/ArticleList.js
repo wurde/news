@@ -46,7 +46,7 @@ function ArticleList() {
     }, 1200)
   }, [])
 
-  if (articles.length === 0) return <Loader type="loader5" style={{ display: 'flex', justifyContent: 'center' }} />;
+  if (articles.length === 0) return <Loader id="articles-loader" type="loader5" style={{ display: 'flex', justifyContent: 'center' }} />;
 
   return (
     <List
