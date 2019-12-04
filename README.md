@@ -5,3 +5,7 @@
 
 
 A simple news reader.
+
+## License
+
+[MIT licensed](./LICENSE)
