@@ -15,22 +15,26 @@ function ArticleList() {
     {
       title:
         'AWS announces DeepComposer, a machine-learning keyboard for developers',
-      link: '',
+      link:
+        'https://techcrunch.com/2019/12/02/aws-announces-deepcomposer-a-machine-learning-keyboard-for-developers/',
       createdAt: new Date()
     },
     {
       title: 'Oil and gas slow to adopt artificial intelligence',
-      link: '',
+      link:
+        'https://www.houstonchronicle.com/business/columnists/tomlinson/article/Oil-and-gas-slow-to-adopt-artificial-intelligence-14861229.php',
       createdAt: new Date()
     },
     {
       title: "This is how Facebook's AI looks for bad stuff",
-      link: '',
+      link:
+        'https://www.technologyreview.com/f/614774/this-is-how-facebooks-ai-looks-for-bad-stuff/',
       createdAt: new Date()
     },
     {
       title: 'Data Scientists: Machine Learning Skills are Key to Future Jobs',
-      link: '',
+      link:
+        'https://insights.dice.com/2019/11/29/data-scientists-machine-learning-skills-key-future-jobs/',
       createdAt: new Date()
     }
   ]);
