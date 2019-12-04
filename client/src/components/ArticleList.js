@@ -43,8 +43,8 @@ function ArticleList() {
           createdAt: new Date()
         }
       ]);
-    }, 10200)
-    // }, 1200)
+    // }, 10200)
+    }, 1200)
   }, [])
 
   if (articles.length === 0) return <Loader style={{ display: 'flex', justifyContent: 'center' }} />;

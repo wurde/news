@@ -6,6 +6,7 @@ import React from 'react';
 import {
   ListItem,
   Link,
+  Card,
 } from '@wurde/components';
 
 /**
@@ -15,13 +16,14 @@ import {
 function Article(props) {
   return (
     <ListItem className="article">
-      <Link
-        href={props.article.link}
-        style={{ color: 'rgb(0,0,0)', fontWeight: '700' }}
-      >
-        {props.article.title}
-      </Link>
-      <hr />
+      <Card style={{ padding: '5px', margin: '10px 0px' }}>
+        <Link
+          href={props.article.link}
+          style={{ color: 'rgb(0,0,0)', fontWeight: '700' }}
+        >
+          {props.article.title}
+        </Link>
+      </Card>
     </ListItem>
   );
 }
