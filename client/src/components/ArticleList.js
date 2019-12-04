@@ -43,10 +43,11 @@ function ArticleList() {
           createdAt: new Date()
         }
       ]);
-    }, 1200)
+    }, 10200)
+    // }, 1200)
   }, [])
 
-  if (articles.length === 0) return <div>Loading</div>;
+  if (articles.length === 0) return <Loader style={{ display: 'flex', justifyContent: 'center' }} />;
 
   return (
     <List
