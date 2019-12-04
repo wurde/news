@@ -24,5 +24,9 @@ describe("Animations", () => {
     cy.get('#articles-loader');
   });
 
-  it.skip("Has an article FadeIn animation", () => {});
+  it("Has an article FadeIn animation", () => {
+    cy.get('.anim-fadein')
+      .should('has.css', 'opacity', '1')
+      .and('has.css', 'transform', 'matrix(1, 0, 0, 1, 0, 0)');
+  });
 });
