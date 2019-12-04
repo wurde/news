@@ -29,7 +29,7 @@ function App() {
           <Header>
             <Heading type="h1" style={{ fontSize: '1rem', textAlign: 'right' }}>
               <Link href="https://github.com/wurde/news" style={{ color: 'rgb(0,0,0)' }}>
-                News <Small>v{pckg.version}</Small>
+                News <Small id="version">v{pckg.version}</Small>
               </Link>
             </Heading>
           </Header>
