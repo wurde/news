@@ -39,15 +39,27 @@ function ArticleList() {
         if (now - updatedAt > hour) {
           const feedUpdateInfo = updateInfo["feeds"] || {};
 
-          // const parser = new Parser();
-          // for (let i = 0; i < rssFeeds.length; i++) {
-          //   console.log(rssFeeds[i].link);
-          //   const feed = await parser.parseURL(CORS_PROXY + rssFeeds[i].link);
-          //   console.log(feed.title);
-          //   // const articles = feed.items.map(item => { return { title: item.title, link: item.link }});
-          // }
+          const parser = new Parser();
+          for (let i = 0; i < rssFeeds.length; i++) {
+            const feed = rssFeeds[i].link;
 
-          updateInfo["updated-at"] = now;
+            // Check last update timestamp for this specific feed.
+            const feedUpdatedAt =
+              feed in feedUpdateInfo
+                ? Number(feedUpdateInfo[feed])
+                : null;
+
+            // If last update was over an hour ago then fetch articles.
+            // This is feed specific.
+            if (now - feedUpdatedAt > hour) {
+              feedUpdateInfo[feed] = now;
+              // const feed = await parser.parseURL(CORS_PROXY + feed);
+              // const articles = feed.items.map(item => { return { title: item.title, link: item.link }});
+            }
+          }
+
+          updateInfo['updated-at'] = now;
+          updateInfo['feeds'] = feedUpdateInfo;
           localStorage.setItem('update-info', JSON.stringify(updateInfo));
 
           // TODO merge unique (new) articles with old articles.
