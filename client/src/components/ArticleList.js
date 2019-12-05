@@ -15,6 +15,7 @@ import rssFeeds from '../data/rss-feeds.json';
 // Some RSS feeds can't be loaded in the browser due to CORS security.
 // To get around this, you can use a proxy.
 const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+const RSS_FEEDS = process.env.NODE_ENV !== 'production' ? rssFeeds.slice(0, 1) : rssFeeds;
 
 /**
  * Define component
@@ -44,8 +45,8 @@ function ArticleList() {
           );
 
           const parser = new Parser();
-          for (let i = 0; i < rssFeeds.length; i++) {
-            const feedLink = rssFeeds[i].link;
+          for (let i = 0; i < RSS_FEEDS.length; i++) {
+            const feedLink = RSS_FEEDS[i].link;
 
             // Check last update timestamp for this specific feed.
             const feedUpdatedAt =
@@ -58,11 +59,12 @@ function ArticleList() {
             if (now - feedUpdatedAt > hour) {
               feedUpdateInfo[feedLink] = now;
               const feed = await parser.parseURL(CORS_PROXY + feedLink);
-              const feedArticles = feed.items.map(item => { return {
+              let feedArticles = feed.items.map(item => { return {
                 title: item.title ? item.title.trim() : null,
                 link: item.link ? item.link.trim() : null,
               }})
               console.log(feed.title.trim(), feedArticles.length);
+              feedArticles = feedArticles.slice(0, 5); // TEMP
 
               // Merge new articles with old articles.
               const feedObj = feedArticles.reduce((obj, a) => {
