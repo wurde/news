@@ -54,14 +54,15 @@ function ArticleList() {
             if (now - feedUpdatedAt > hour) {
               feedUpdateInfo[feedLink] = now;
               const feed = await parser.parseURL(CORS_PROXY + feedLink);
-              const articles = feed.items.map(item => { return {
-                title: item.title.trim(),
-                link: item.link.trim(),
+              const feedArticles = feed.items.map(item => { return {
+                title: item.title ? item.title.trim() : null,
+                link: item.link ? item.link.trim() : null,
                 fetchedAt: Date.now(),
               }});
+              console.log(feed.title.trim(), feedArticles.length);
 
               // Merge new articles with old articles.
-              localArticles = { ...localArticles, ...articles };
+              localArticles = { ...localArticles, ...feedArticles };
 
               updateInfo['updated-at'] = now;
               updateInfo['feeds'] = feedUpdateInfo;
@@ -69,9 +70,10 @@ function ArticleList() {
             }
           }
         }
+        console.log('localArticles', localArticles);
 
         // Set articles for display.
-        setArticles(localArticles || []);
+        setArticles(localArticles);
 
         // Save updated articles to local storage.
         localStorage.setItem('articles', JSON.stringify(localArticles));
