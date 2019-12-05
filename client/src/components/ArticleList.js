@@ -38,6 +38,10 @@ function ArticleList() {
         // If last update was over an hour ago then fetch articles.
         if (now - updatedAt > hour) {
           const feedUpdateInfo = updateInfo["feeds"] || {};
+          let localObj = localArticles.reduce(
+            (a, obj) => (obj[a.title] = a.link),
+            {}
+          );
 
           const parser = new Parser();
           for (let i = 0; i < rssFeeds.length; i++) {
@@ -57,20 +61,25 @@ function ArticleList() {
               const feedArticles = feed.items.map(item => { return {
                 title: item.title ? item.title.trim() : null,
                 link: item.link ? item.link.trim() : null,
-                fetchedAt: Date.now(),
-              }});
+              }})
               console.log(feed.title.trim(), feedArticles.length);
 
               // Merge new articles with old articles.
-              localArticles = { ...localArticles, ...feedArticles };
+              const feedObj = feedArticles.reduce((obj, a) => {
+                obj[a.title] = a.link; return obj;
+              }, {});
+              localObj = { ...localObj, ...feedObj };
 
               updateInfo['updated-at'] = now;
               updateInfo['feeds'] = feedUpdateInfo;
               localStorage.setItem('update-info', JSON.stringify(updateInfo));
             }
           }
+
+          localArticles = Object.keys(localObj).map(key => {
+            return { title: key, link: localObj[key] };
+          });
         }
-        console.log('localArticles', localArticles);
 
         // Set articles for display.
         setArticles(localArticles);
