@@ -53,9 +53,15 @@ function ArticleList() {
             // This is feed specific.
             if (now - feedUpdatedAt > hour) {
               feedUpdateInfo[feedLink] = now;
+              console.log('feedLink', feedLink);
               const feed = await parser.parseURL(CORS_PROXY + feedLink);
               console.log('feed.title', feed.title);
               // const articles = feed.items.map(item => { return { title: item.title, link: item.link }});
+
+              // TEMP
+              updateInfo['updated-at'] = now;
+              updateInfo['feeds'] = feedUpdateInfo;
+              localStorage.setItem('update-info', JSON.stringify(updateInfo));
             }
           }
 
