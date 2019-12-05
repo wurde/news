@@ -41,19 +41,20 @@ function ArticleList() {
 
           const parser = new Parser();
           for (let i = 0; i < rssFeeds.length; i++) {
-            const feed = rssFeeds[i].link;
+            const feedLink = rssFeeds[i].link;
 
             // Check last update timestamp for this specific feed.
             const feedUpdatedAt =
-              feed in feedUpdateInfo
-                ? Number(feedUpdateInfo[feed])
+              feedLink in feedUpdateInfo
+                ? Number(feedUpdateInfo[feedLink])
                 : null;
 
             // If last update was over an hour ago then fetch articles.
             // This is feed specific.
             if (now - feedUpdatedAt > hour) {
-              feedUpdateInfo[feed] = now;
-              // const feed = await parser.parseURL(CORS_PROXY + feed);
+              feedUpdateInfo[feedLink] = now;
+              const feed = await parser.parseURL(CORS_PROXY + feedLink);
+              console.log('feed.title', feed.title);
               // const articles = feed.items.map(item => { return { title: item.title, link: item.link }});
             }
           }
