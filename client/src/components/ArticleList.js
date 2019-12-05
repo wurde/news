@@ -27,34 +27,37 @@ function ArticleList() {
     async function fetchFeed() {
       try {
         // Fetch old articles from local storage.
-        let localArticles = localStorage.getItem('articles');
-        console.log('localArticles', localArticles);
+        let localArticles = JSON.parse(localStorage.getItem('articles')) || [];
 
-        // Check last update timestamp.
-        const updatedAt = Number(localStorage.getItem('updated-at'));
-        const day = 1000 * 60 * 60 * 24;
+        // Get last update timestamp.
+        const updateInfo = JSON.parse(localStorage.getItem('update-info')) || {};
+        const updatedAt = "updated-at" in updateInfo ? Number(updateInfo["updated-at"]) : null;
+        const hour = 1000 * 60 * 60;
         const now = Date.now();
-        if ((updatedAt - now) > day) {
-          localStorage.setItem('updated-at', now);
-          console.log('fetching')
+
+        // If last update was over an hour ago then fetch articles.
+        if (now - updatedAt > hour) {
+          const feedUpdateInfo = updateInfo["feeds"] || {};
+
+          // const parser = new Parser();
+          // for (let i = 0; i < rssFeeds.length; i++) {
+          //   console.log(rssFeeds[i].link);
+          //   const feed = await parser.parseURL(CORS_PROXY + rssFeeds[i].link);
+          //   console.log(feed.title);
+          //   // const articles = feed.items.map(item => { return { title: item.title, link: item.link }});
+          // }
+
+          updateInfo["updated-at"] = now;
+          localStorage.setItem('update-info', JSON.stringify(updateInfo));
+
+          // TODO merge unique (new) articles with old articles.
         }
-        console.log('updatedAt', updatedAt);
 
-        const parser = new Parser();
-        // // If last update was over an hour ago then fetch articles.
-        // for (let i = 0; i < rssFeeds.length; i++) {
-        //   console.log(rssFeeds[i].link);
-        // }
-        const feed = await parser.parseURL(CORS_PROXY + rssFeeds[55].link);
-        console.log(feed.title);
-
-        // TODO merge unique (new) articles with old articles.
-
-        const articles = feed.items.map(item => { return { title: item.title, link: item.link }});
-        setArticles(articles)
+        // Set articles for display.
+        setArticles(localArticles || []);
 
         // Save updated articles to local storage.
-        localStorage.setItem('articles', localArticles);
+        localStorage.setItem('articles', JSON.stringify(localArticles));
       } catch (e) {
         console.error(e)
       }
