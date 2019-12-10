@@ -11,7 +11,7 @@ import ArticleList from './ArticleList';
 
 function MainContent() {
   return (
-    <main style={{ backgroundColor: '#fff' }}>
+    <main>
       <hr />
       <ArticleList />
     </main>
