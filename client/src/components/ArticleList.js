@@ -40,7 +40,7 @@ function ArticleList() {
         if (now - updatedAt > hour) {
           const feedUpdateInfo = updateInfo["feeds"] || {};
           let localObj = localArticles.reduce(
-            (a, obj) => (obj[a.title] = a.link),
+            (obj, a) => { obj[a.title] = a.link; return obj },
             {}
           );
 
