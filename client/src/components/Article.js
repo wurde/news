@@ -19,8 +19,8 @@ function Article(props) {
   const fadeInProps = useSpring({
     from: { opacity: 0, transform: 'translateY(50px)' },
     to: { opacity: 1, transform: 'translateY(0px)' },
-    delay: props.index * 100,
-    config: { duration: 100 }
+    delay: props.index * 25,
+    config: { duration: 500 }
   });
 
   return (
@@ -29,7 +29,8 @@ function Article(props) {
         <Card
           className="card"
           shadow={4}
-          borderRadius="0"
+          border="dotted"
+          borderRadius="3rem 0 0 3rem"
           style={{ padding: '5px', margin: '10px 0px' }}
         >
           <Link
