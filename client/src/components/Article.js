@@ -26,7 +26,12 @@ function Article(props) {
   return (
     <ListItem className="article">
       <Anim className="anim-fadein" style={fadeInProps}>
-        <Card className="card" shadow={4} style={{ padding: '5px', margin: '10px 0px' }}>
+        <Card
+          className="card"
+          shadow={4}
+          borderRadius="0"
+          style={{ padding: '5px', margin: '10px 0px' }}
+        >
           <Link
             href={props.article.link}
             style={{ color: 'rgb(0,0,0)', fontWeight: '700' }}
