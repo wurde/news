@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { Button, Icon } from '@wurde/components';
 import ArticleList from './ArticleList';
 
 /**
@@ -13,6 +14,10 @@ function MainContent() {
   return (
     <main>
       <hr />
+      <Button>
+        <Icon type="newspaper-o" fill="blue" />
+      </Button>
+
       <ArticleList />
     </main>
   );
