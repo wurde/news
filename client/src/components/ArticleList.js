@@ -27,12 +27,8 @@ function ArticleList({ feeds }) {
 
   useEffect(() => {
     async function fetchArticles() {
-      try {
-        const newArticles = await RSSFeed.fetchAll(feeds);
-        setArticles(newArticles);
-      } catch (e) {
-        console.error(e)
-      }
+      const newArticles = await RSSFeed.fetchAll(feeds);
+      setArticles(newArticles);
     }
     fetchArticles();
   }, [feeds])
