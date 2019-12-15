@@ -6,7 +6,6 @@ import React, { useState, useEffect } from 'react';
 import { Row, Column } from '@wurde/components';
 import { Modal, Divider, Heading } from '@wurde/components';
 import { Label, Input } from '@wurde/components';
-import rssFeeds from '../data/rss-feeds.json';
 
 /**
  * Define styles
@@ -22,25 +21,14 @@ const InputStyle = {
  * Define component
  */
 
-function FeedModal({ isOpen, toggleModal }) {
-  const [feeds, setFeeds] = useState([]);
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('feeds')) || rssFeeds;
-    setFeeds(data);
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('feeds', JSON.stringify(feeds));
-  }, [feeds])
-
+function FeedModal({ isOpen, toggleModal, feeds, setFeeds }) {
   function toggleSubscription(e) {
     const data = feeds.map(feed => {
       if (feed.link === e.target.value) {
-        feed.subscribed = !feed.subscribed
+        feed.subscribed = !feed.subscribed;
       }
       return feed;
-    })
+    });
 
     setFeeds(data);
   }
@@ -61,7 +49,7 @@ function FeedModal({ isOpen, toggleModal }) {
             <Column spacing={2}>
               {feeds.map((feed, i) => {
                 return (
-                  <div>
+                  <div key={i}>
                     <Input
                       id={`feed-${i}`}
                       type="checkbox"
