@@ -26,13 +26,7 @@ function FeedModal({ isOpen, toggleModal }) {
   const [feeds, setFeeds] = useState([]);
 
   useEffect(() => {
-    let data = JSON.parse(localStorage.getItem('feeds'));
-
-    if (!data) {
-      data = rssFeeds.map(feed => { feed.subscribed = false; return feed; });
-      localStorage.setItem('feeds', JSON.stringify(data));
-    }
-
+    const data = JSON.parse(localStorage.getItem('feeds')) || rssFeeds;
     setFeeds(data);
   }, [])
 
@@ -41,7 +35,6 @@ function FeedModal({ isOpen, toggleModal }) {
   }, [feeds])
 
   function toggleSubscription(e) {
-    e.preventDefault();
     const data = feeds.map(feed => {
       if (feed.link === e.target.value) {
         feed.subscribed = !feed.subscribed
