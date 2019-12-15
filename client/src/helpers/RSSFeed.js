@@ -50,7 +50,11 @@ class RSSFeed {
       }
     }
 
-    const articles = [...newArticles, ...oldArticles];
+    const oldLinks = oldArticles.map(article => article.link);
+    const freshArticles = newArticles.filter(
+      article => !oldLinks.includes(article.link)
+    );
+    const articles = [...freshArticles, ...oldArticles];
     LocalStorage.setArticles(articles);
     return articles;
   }
