@@ -32,6 +32,7 @@ class RSSFeed {
       // If last update was over an hour ago then fetch articles.
       if (now - updatedAt > HOUR) {
         const feed = await parser.parseURL(CORS_PROXY + link);
+
         const articles = feed.items.map(item => {
           return {
             title: item.title ? item.title.trim() : null,
@@ -39,6 +40,8 @@ class RSSFeed {
           };
         });
         allArticles = allArticles.concat(articles);
+
+        LocalStorage.setFeedUpdatedAt(link);
       }
     }
 
