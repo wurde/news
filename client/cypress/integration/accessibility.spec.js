@@ -10,18 +10,6 @@ describe("Accessibility", () => {
   it('Has accessible color contrast', () => {
     cy.get('body').should('has.css', 'background-color', 'rgb(255, 255, 255)');
     cy.get('main').should('has.css', 'background-color', 'rgba(0, 0, 0, 0)');
-    cy.get('#articles a').should('has.css', 'color', 'rgb(0, 0, 0)')
-    .and('has.css', 'font-weight', '700');
-    cy.get('.article .card')
-      .should(
-        'has.css',
-        'box-shadow',
-        'rgba(77, 99, 119, 0.47) 0px 16px 24px -8px'
-      )
-      .and('has.css', 'border', '1.5px dotted rgb(0, 0, 0)')
-      .and('has.css', 'border-radius', '48px 0px 0px 48px')
-      .and('has.css', 'padding', '5px')
-      .and('has.css', 'margin', '10px 0px');
   });
 
   it('De-emphasize heading', () => {
