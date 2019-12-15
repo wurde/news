@@ -56,11 +56,11 @@ class RSSFeed {
       article => !oldLinks.includes(article.link)
     );
     const articles = [...freshArticles, ...oldArticles];
-
-    // TODO Filter out read articles.
-
     LocalStorage.setArticles(articles);
-    return articles;
+
+    // Filter out read articles.
+    const unreadArticles = articles.filter(article => !article['read-at']);
+    return unreadArticles;
   }
 }
 
