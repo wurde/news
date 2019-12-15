@@ -38,14 +38,7 @@ class LocalStorage {
   }
 
   static getArticles() {
-    const data = JSON.parse(localStorage.getItem('articles')) || [];
-
-    let localObj = data.reduce((obj, a) => {
-      obj[a.title] = a.link;
-      return obj;
-    }, {});
-
-    return data;
+    return JSON.parse(localStorage.getItem('articles')) || [];
   }
 
   static setArticles(data) {

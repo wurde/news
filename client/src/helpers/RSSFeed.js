@@ -23,29 +23,36 @@ class RSSFeed {
     const parser = new Parser();
     const now = Date.now();
     const subscriptions = feeds.filter(feed => feed.subscribed);
-    let allArticles = [];
+    let newArticles = [];
+    const oldArticles = LocalStorage.getArticles();
 
     for (let i = 0; i < subscriptions.length; i++) {
       const link = subscriptions[i].link;
       const updatedAt = Number(subscriptions[i]['updated-at']);
 
       // If last update was over an hour ago then fetch articles.
-      if (now - updatedAt > HOUR) {
-        const feed = await parser.parseURL(CORS_PROXY + link);
+      if (oldArticles.length === 0 || now - updatedAt > HOUR) {
+        try {
+          const feed = await parser.parseURL(CORS_PROXY + link);
 
-        const articles = feed.items.map(item => {
-          return {
-            title: item.title ? item.title.trim() : null,
-            link: item.link ? item.link.trim() : null
-          };
-        });
-        allArticles = allArticles.concat(articles);
+          const articles = feed.items.map(item => {
+            return {
+              title: item.title ? item.title.trim() : null,
+              link: item.link ? item.link.trim() : null
+            };
+          });
+          newArticles = newArticles.concat(articles);
 
-        LocalStorage.setFeedUpdatedAt(link);
+          LocalStorage.setFeedUpdatedAt(link);
+        } catch (e) {
+          console.error(e);
+        }
       }
     }
 
-    return allArticles;
+    const articles = [...newArticles, ...oldArticles];
+    LocalStorage.setArticles(articles);
+    return articles;
   }
 }
 
