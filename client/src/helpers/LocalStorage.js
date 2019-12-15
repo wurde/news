@@ -21,7 +21,6 @@ class LocalStorage {
   }
 
   static setFeeds(data) {
-    console.log('data', data, data.constructor)
     localStorage.setItem('feeds', JSON.stringify(data));
   }
 

@@ -3,8 +3,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Row, Column } from '@wurde/components';
-import { Button, Icon } from '@wurde/components';
+import { Row, Column, Icon } from '@wurde/components';
 import ArticleList from './ArticleList';
 import FeedModal from './FeedModal';
 import LocalStorage from '../helpers/LocalStorage';
@@ -56,7 +55,7 @@ function MainContent() {
 
       <Row>
         <Column>
-          <ArticleList />
+          <ArticleList feeds={feeds} />
         </Column>
       </Row>
     </main>

@@ -2,7 +2,7 @@
  * Dependencies
  */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Row, Column } from '@wurde/components';
 import { Modal, Divider, Heading } from '@wurde/components';
 import { Label, Input } from '@wurde/components';

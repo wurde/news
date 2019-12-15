@@ -5,7 +5,6 @@
 import React, { useState, useEffect } from 'react';
 import { List, Loader } from '@wurde/components';
 import Article from './Article';
-import LocalStorage from '../helpers/LocalStorage';
 import RSSFeed from '../helpers/RSSFeed';
 
 /**
@@ -23,22 +22,20 @@ const ListStyle = {
  * Define component
  */
 
-function ArticleList() {
+function ArticleList({ feeds }) {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     async function fetchArticles() {
       try {
-        const feeds = LocalStorage.getFeeds();
-        // const oldArticles = LocalStorage.getArticles();
-        // const newArticles = await RSSFeed.fetchAll(feeds);
-        setArticles([{title: 'blah', link: 'http://blah.com'}]);
+        const newArticles = await RSSFeed.fetchAll(feeds);
+        setArticles(newArticles);
       } catch (e) {
         console.error(e)
       }
     }
     fetchArticles();
-  }, [])
+  }, [feeds])
 
   if (articles.length === 0) return <Loader id="articles-loader" type="loader5" style={{ display: 'flex', justifyContent: 'center' }} />;
 

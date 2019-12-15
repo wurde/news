@@ -20,56 +20,29 @@ const HOUR = 1000 * 60 * 60;
 
 class RSSFeed {
   static async fetchAll(feeds) {
-    // const oldArticles = LocalStorage.getOldArticles();
-    // const subscriptions = LocalStorage.getSubscriptions();
-    // const newArticles = await RSSFeed.fetchAll();
-    // setArticles(newArticles);
-    // // LocalStorage.saveArticles(data);
+    const parser = new Parser();
+    const now = Date.now();
+    const subscriptions = feeds.filter(feed => feed.subscribed);
+    let allArticles = [];
 
-    // const parser = new Parser();
-    // const now = Date.now();
+    for (let i = 0; i < subscriptions.length; i++) {
+      const link = subscriptions[i].link;
+      const updatedAt = Number(subscriptions[i]['updated-at']);
 
-    // localArticles = Object.keys(localObj).map(key => {
-    //   return { title: key, link: localObj[key] };
-    // });
+      // If last update was over an hour ago then fetch articles.
+      if (now - updatedAt > HOUR) {
+        const feed = await parser.parseURL(CORS_PROXY + link);
+        const articles = feed.items.map(item => {
+          return {
+            title: item.title ? item.title.trim() : null,
+            link: item.link ? item.link.trim() : null
+          };
+        });
+        allArticles = allArticles.concat(articles);
+      }
+    }
 
-    // // Add default feeds.
-    // // Fetch subscriptions.
-    // // const subscriptions = 
-
-    // for (let i = 0; i < subscriptions.length; i++) {
-    //   const feedLink = subscriptions[i].link;
-
-    //   // Check last update timestamp for this specific feed.
-    //   const feedUpdatedAt =
-    //     feedLink in feedUpdateInfo ? Number(feedUpdateInfo[feedLink]) : null;
-
-    //   // If last update was over an hour ago then fetch articles.
-    //   // This is feed specific.
-    //   if (now - feedUpdatedAt > hour) {
-    //     feedUpdateInfo[feedLink] = now;
-    //     const feed = await parser.parseURL(CORS_PROXY + feedLink);
-    //     let feedArticles = feed.items.map(item => {
-    //       return {
-    //         title: item.title ? item.title.trim() : null,
-    //         link: item.link ? item.link.trim() : null
-    //       };
-    //     });
-    //     console.log(feed.title.trim(), feedArticles.length);
-    //     feedArticles = feedArticles.slice(0, 5); // TEMP
-
-    //     // Merge new articles with old articles.
-    //     const feedObj = feedArticles.reduce((obj, a) => {
-    //       obj[a.title] = a.link;
-    //       return obj;
-    //     }, {});
-    //     localObj = { ...localObj, ...feedObj };
-
-    //     updateInfo['updated-at'] = now;
-    //     updateInfo['feeds'] = feedUpdateInfo;
-    //     localStorage.setItem('update-info', JSON.stringify(updateInfo));
-    //   }
-    // }
+    return allArticles;
   }
 }
 
