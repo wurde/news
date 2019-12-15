@@ -36,12 +36,16 @@ function ArticleList({ feeds }) {
   if (articles.length === 0) return <Loader id="articles-loader" type="loader5" style={{ display: 'flex', justifyContent: 'center' }} />;
 
   return (
-    <List
-      id="articles"
-      type="ordered"
-      style={ListStyle}
-    >
-      {articles.map((article, i) => <Article key={i} index={i} article={article}></Article>)}
+    <List id="articles" type="ordered" style={ListStyle}>
+      {articles.map((article, i) => (
+        <Article
+          key={i}
+          index={i}
+          article={article}
+          articles={articles}
+          setArticles={setArticles}
+        ></Article>
+      ))}
     </List>
   );
 }
