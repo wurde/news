@@ -18,8 +18,8 @@ describe("Accessibility", () => {
         'box-shadow',
         'rgba(77, 99, 119, 0.47) 0px 16px 24px -8px'
       )
-      .and('has.css', 'border', '1px solid rgba(0, 0, 0, 0.125)')
-      .and('has.css', 'border-radius', '4px')
+      .and('has.css', 'border', '1.5px dotted rgb(0, 0, 0)')
+      .and('has.css', 'border-radius', '48px 0px 0px 48px')
       .and('has.css', 'padding', '5px')
       .and('has.css', 'margin', '10px 0px');
   });
