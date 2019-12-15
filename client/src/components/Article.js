@@ -12,6 +12,23 @@ import {
 } from '@wurde/components';
 
 /**
+ * Define styles
+ */
+
+const CardStyle = {
+  padding: '5px',
+  margin: '10px 0px',
+  backgroundColor: 'none',
+  border: 'none',
+};
+
+const LinkStyle = {
+  color: 'rgb(0,0,0)',
+  fontWeight: '700',
+  textDecoration: 'none',
+};
+
+/**
  * Define component
  */
 
@@ -28,14 +45,12 @@ function Article(props) {
       <Anim className="anim-fadein" style={fadeInProps}>
         <Card
           className="card"
-          shadow={4}
-          border="dotted"
-          borderRadius="3rem 0 0 3rem"
-          style={{ padding: '5px', margin: '10px 0px' }}
+          shadow={0}
+          style={CardStyle}
         >
           <Link
             href={props.article.link}
-            style={{ color: 'rgb(0,0,0)', fontWeight: '700' }}
+            style={LinkStyle}
           >
             {props.article.title}
           </Link>

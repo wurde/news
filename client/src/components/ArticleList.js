@@ -18,6 +18,17 @@ const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 const RSS_FEEDS = process.env.NODE_ENV !== 'production' ? rssFeeds.slice(0, 1) : rssFeeds;
 
 /**
+ * Define styles
+ */
+
+const ListStyle = {
+  backgroundColor: '#F2EEE0',
+  listStyleType: 'none',
+  padding: '10px',
+  margin: '0'
+};
+
+/**
  * Define component
  */
 
@@ -101,11 +112,7 @@ function ArticleList() {
     <List
       id="articles"
       type="ordered"
-      style={{
-        listStyleType: 'none',
-        padding: '0px 10px',
-        margin: '0'
-      }}
+      style={ListStyle}
     >
       {articles.map((article, i) => <Article key={i} index={i} article={article}></Article>)}
     </List>
