@@ -44,6 +44,19 @@ class LocalStorage {
   static setArticles(data) {
     localStorage.setItem('articles', JSON.stringify(data));
   }
+
+  static markRead(link) {
+    const data =  JSON.parse(localStorage.getItem('articles')) || [];
+
+    const articles = data.map(article => {
+      if (article.link === link) {
+        article['read-at'] = Date.now();
+      }
+      return article;
+    });
+
+    localStorage.setItem('articles', JSON.stringify(articles));
+  }
 }
 
 /**

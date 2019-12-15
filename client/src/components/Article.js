@@ -5,6 +5,7 @@
 import React from 'react';
 import { useSpring } from 'react-spring';
 import { ListItem, Link, Card, Anim } from '@wurde/components';
+import LocalStorage from '../helpers/LocalStorage';
 
 /**
  * Define styles
@@ -35,15 +36,20 @@ function Article(props) {
   });
 
   function markRead(e) {
-    // TODO Mark article as read.
-    // TODO Remove from list.
+    LocalStorage.markRead(props.article.link);
   }
 
   return (
     <ListItem className="article">
       <Anim className="anim-fadein" style={fadeInProps}>
         <Card className="card" shadow={0} style={CardStyle}>
-          <Link href={props.article.link} style={LinkStyle} onClick={markRead} target="_blank" rel="nofollow">
+          <Link
+            href={props.article.link}
+            style={LinkStyle}
+            onClick={markRead}
+            target="_blank"
+            rel="nofollow"
+          >
             {props.article.title}
           </Link>
         </Card>

@@ -50,11 +50,15 @@ class RSSFeed {
       }
     }
 
+    // Prevent duplicate articles.
     const oldLinks = oldArticles.map(article => article.link);
     const freshArticles = newArticles.filter(
       article => !oldLinks.includes(article.link)
     );
     const articles = [...freshArticles, ...oldArticles];
+
+    // TODO Filter out read articles.
+
     LocalStorage.setArticles(articles);
     return articles;
   }
