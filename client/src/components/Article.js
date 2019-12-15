@@ -4,12 +4,7 @@
 
 import React from 'react';
 import { useSpring } from 'react-spring';
-import {
-  ListItem,
-  Link,
-  Card,
-  Anim,
-} from '@wurde/components';
+import { ListItem, Link, Card, Anim } from '@wurde/components';
 
 /**
  * Define styles
@@ -19,13 +14,12 @@ const CardStyle = {
   padding: '5px',
   margin: '10px 0px',
   backgroundColor: 'none',
-  border: 'none',
+  border: 'none'
 };
 
 const LinkStyle = {
   color: 'rgb(0,0,0)',
-  fontWeight: '700',
-  textDecoration: 'none',
+  textDecoration: 'none'
 };
 
 /**
@@ -40,18 +34,16 @@ function Article(props) {
     config: { duration: 500 }
   });
 
+  function markRead(e) {
+    // TODO Mark article as read.
+    // TODO Remove from list.
+  }
+
   return (
     <ListItem className="article">
       <Anim className="anim-fadein" style={fadeInProps}>
-        <Card
-          className="card"
-          shadow={0}
-          style={CardStyle}
-        >
-          <Link
-            href={props.article.link}
-            style={LinkStyle}
-          >
+        <Card className="card" shadow={0} style={CardStyle}>
+          <Link href={props.article.link} style={LinkStyle} onClick={markRead} target="_blank" rel="nofollow">
             {props.article.title}
           </Link>
         </Card>
