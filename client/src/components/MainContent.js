@@ -14,9 +14,7 @@ function MainContent() {
   return (
     <main>
       <hr />
-      <Button>
-        <Icon type="newspaper-o" fill="blue" />
-      </Button>
+      <Icon type="newspaper-o" fill="#348FF0" />
 
       <ArticleList />
     </main>
