@@ -6,6 +6,10 @@
 
 A simple news reader.
 
+## Preview
+
+![GIF of Kanban](img/kanban-demo.gif)
+
 ## License
 
 [MIT licensed](./LICENSE)
