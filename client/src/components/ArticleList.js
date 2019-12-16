@@ -24,7 +24,6 @@ const ListStyle = {
 
 function ArticleList({ feeds }) {
   const [articles, setArticles] = useState([]);
-  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     async function fetchArticles() {
@@ -32,7 +31,7 @@ function ArticleList({ feeds }) {
       setArticles(newArticles.slice(0, 25));
     }
     fetchArticles();
-  }, [feeds, refresh]);
+  }, [feeds, articles.length < 25]);
 
   if (articles.length === 0) return <Loader id="articles-loader" type="loader5" style={{ display: 'flex', justifyContent: 'center' }} />;
 
@@ -45,8 +44,6 @@ function ArticleList({ feeds }) {
           article={article}
           articles={articles}
           setArticles={setArticles}
-          setRefresh={setRefresh}
-          refresh={refresh}
         ></Article>
       ))}
     </List>

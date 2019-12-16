@@ -36,9 +36,11 @@ function Article(props) {
   });
 
   function markRead(e) {
-    LocalStorage.markRead(props.article.link);
+    e.preventDefault();
+    const link = props.article.link;
+    LocalStorage.markRead(link);
     props.setArticles(props.articles.filter((x, i) => i !== props.index));
-    props.setRefresh(!props.refresh);
+    window.open(link);
   }
 
   return (
