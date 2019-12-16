@@ -8,7 +8,7 @@ A simple news reader.
 
 ## Preview
 
-![GIF of Kanban](img/kanban-demo.gif)
+![GIF of News](img/news-demo.gif)
 
 ## License
 
